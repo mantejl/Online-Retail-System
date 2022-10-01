@@ -29,7 +29,7 @@ std::string Clothing::displayString() const {
     string clothingDisplay = ""; 
     clothingDisplay = clothingDisplay + name_ + "\n"; 
     clothingDisplay = clothingDisplay + "Size: " + size_ + " Brand: " + brand_ + "\n"; 
-    clothingDisplay = clothingDisplay + to_string(price_) + " " + to_string(qty_) + " left."; 
+    clothingDisplay = clothingDisplay + to_string(getPrice()) + " " + to_string(getQty()) + " left."; 
     return clothingDisplay;
 }
 
