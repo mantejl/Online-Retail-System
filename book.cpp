@@ -21,7 +21,8 @@ Book::~Book() {
 set<std::string> Book::keywords() const {
     set<string> name = parseStringToWords(name_);
     set<string> author = parseStringToWords(author_); 
-    set<string> bookKeywords = setUnion(name,author); 
+    set<string> bookKeywords = setUnion(name,author);
+    set<string>::iterator itr; 
     bookKeywords.insert(isbn_); 
     return bookKeywords; 
 }

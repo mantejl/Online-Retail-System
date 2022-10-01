@@ -15,11 +15,11 @@ MyDataStore::MyDataStore() {}
 
 MyDataStore::~MyDataStore() {
     // delete products and users 
-    for (int i = 0; i < products.size(); i++) {
+    for (unsigned int i = 0; i < products.size(); i++) {
         delete products[i]; 
     }
 
-    for (int i = 0; i < user.size(); i++) {
+    for (unsigned int i = 0; i < user.size(); i++) {
         delete user[i]; 
     }
 
@@ -39,12 +39,12 @@ void MyDataStore::addProduct(Product* p) {
 }
 
 void MyDataStore::addUser(User* u) { 
-    users.insert(make_pair(u->getName(), u)); 
-    user.push_back(u); 
+    users.insert(make_pair(convToLower(u->getName()), u)); 
+    user.push_back(u);
 }
 
 std::vector<Product*> MyDataStore::search(std::vector<std::string>& terms, int type) {
-    set<Product*> keys;
+    set<Product*> keys = keyword[terms[0]];
     vector<string>::iterator it;
     for (it = terms.begin(); it != terms.end(); ++it) {
         if (keyword.find(*it) != keyword.end()) {
@@ -63,6 +63,7 @@ std::vector<Product*> MyDataStore::search(std::vector<std::string>& terms, int t
 }
 
 void MyDataStore::addToCart(string name, Product* p) {
+    name = convToLower(name); 
     if (users.find(name) == users.end()) {
         cout << "Invalid request" << endl;
         return;
@@ -75,33 +76,52 @@ void MyDataStore::addToCart(string name, Product* p) {
 }
 
 void MyDataStore::buyCart(string user) {
-    vector<Product*>::iterator it;
+    user = convToLower(user); 
     if (userCart.find(user) == userCart.end()) {
         cout << "Invalid username" << endl;
         return;
     }
-    for (it = userCart[user].begin(); it != userCart[user].end(); ++it) {
+    vector<Product*>::iterator it;
+    for (it = userCart[user].begin(); it < userCart[user].end(); ) {
         if ((users[user]->getBalance() > (*it)->getPrice()) && ((*it)->getQty() > 0)) {
             (*it)->subtractQty(1);
             users[user]->deductAmount((*it)->getPrice());
             userCart[user].erase(it);
-        }
-    }
+        } else {
+            ++it; 
+        }   
+    }   
 }
 
-string MyDataStore::viewCart(string user) {
-    vector<Product*>::iterator it;
-    string output = "";
+
+
+void MyDataStore::viewCart(string user) {
+    user = convToLower(user); 
     if (userCart.find(user) == userCart.end()) {
-        return "Invalid username";
+        cout << "Invalid request" << endl;
+        return;
     }
+    vector<Product*>::iterator it;
+    int i = 1;
     for (it = userCart[user].begin(); it != userCart[user].end(); ++it) {
-        int i = 1;
-        output = "Item " + to_string(i) + "\n";
-        output = output + (*it)->displayString();
+        cout << "Item " << i << endl;
+        cout << (*it)->displayString() << endl;
         i++;
     }
-    return output;
 }
 
-void MyDataStore::dump(std::ostream& ofile) {}
+void MyDataStore::dump(std::ostream& ofile) {
+    ofile << "<products>" << endl;
+    vector<Product*>::iterator itr;
+    for (itr = products.begin(); itr != products.end(); ++itr) {
+        (*itr)->dump(ofile); 
+    } 
+    ofile << "</products>" << endl;
+    
+    ofile << "<users>" << endl;
+    map<string, User*>::iterator itr2; 
+    for (itr2 = users.begin(); itr2 != users.end(); itr2++) {
+        (*itr2).second->dump(ofile); 
+    }
+    ofile << "</users>" << endl;
+}

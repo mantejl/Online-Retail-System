@@ -117,7 +117,7 @@ int main(int argc, char* argv[])
                 ss >> name; 
                 int index; 
                 ss >> index; 
-                ds.addToCart(name,hits[index]); 
+                ds.addToCart(name,hits[index-1]); 
             }
             else {
                 cout << "Unknown command" << endl;

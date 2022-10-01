@@ -14,7 +14,7 @@ class MyDataStore: public DataStore {
         ~MyDataStore();
         void addProduct(Product* p); 
         void addUser(User* u); 
-        std::string viewCart(std::string user); 
+        void viewCart(std::string user); 
         void addToCart(std::string user, Product*); 
         void buyCart(std::string user); 
         std::vector<Product*> search(std::vector<std::string>& terms, int type); 
