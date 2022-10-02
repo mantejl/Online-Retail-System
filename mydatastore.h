@@ -28,10 +28,4 @@ class MyDataStore: public DataStore {
         std::map<std::string, User*> users; 
 };
 
-struct ProdNameSort {
-    bool operator()(Product* p1, Product* p2) {
-        return (p1->getName() < p2->getName());
-    }
-};
-
 #endif

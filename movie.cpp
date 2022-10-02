@@ -27,8 +27,10 @@ set<std::string> Movie::keywords() const {
 std::string Movie::displayString() const {
     string movieDisplay = ""; 
     movieDisplay = movieDisplay + name_ + "\n"; 
-    movieDisplay = movieDisplay + "Genre: " + genre_ + " Rating: " + rating_ + "\n"; 
-    movieDisplay = movieDisplay + to_string(getPrice()) + " " + to_string(getQty()) + " left."; 
+    movieDisplay = movieDisplay + "Genre: " + genre_ + " Rating: " + rating_ + "\n";
+    string price = to_string(getPrice()); 
+    string finalPrice = price.substr(0,5);  
+    movieDisplay = movieDisplay + finalPrice + " " + to_string(getQty()) + " left."; 
     return movieDisplay; 
 }
 

@@ -102,22 +102,31 @@ int main(int argc, char* argv[])
             }
 	    /* Add support for other commands here */
             else if (cmd == "VIEWCART") {
+                // taking inputs for viewCart
                 string name; 
                 ss >> name; 
                 ds.viewCart(name); 
             }
             else if (cmd == "BUYCART") {
+                // taking inputs for buyCart
                 string name; 
                 ss >> name; 
                 ds.buyCart(name); 
             } 
             else if (cmd == "ADD") {
-                // pass in number to addToCart as hits[index]
+                // taking in inputs to pass in 
                 string name; 
                 ss >> name; 
-                int index; 
+                unsigned int index; 
                 ss >> index; 
-                ds.addToCart(name,hits[index-1]); 
+                // checking if product passed in is valid 
+                if (index <= hits.size()) {
+                    // pass in number to addToCart as hits[index]
+                    ds.addToCart(name,hits[index-1]); 
+                } else {
+                    cout << "No products to add " << endl; 
+                }
+                
             }
             else {
                 cout << "Unknown command" << endl;

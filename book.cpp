@@ -31,7 +31,9 @@ std::string Book::displayString() const {
     string bookDisplay = ""; 
     bookDisplay = bookDisplay + name_ + "\n"; 
     bookDisplay = bookDisplay + "Author: " + author_ + " ISBN: " + isbn_ + "\n"; 
-    bookDisplay = bookDisplay + to_string(getPrice()) + " " + to_string(getQty()) + " left."; 
+    string price = to_string(getPrice()); 
+    string finalPrice = price.substr(0,5); 
+    bookDisplay = bookDisplay + finalPrice + " " + to_string(getQty()) + " left."; 
     return bookDisplay; 
 }
 
