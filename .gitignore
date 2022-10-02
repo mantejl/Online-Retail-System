@@ -2,4 +2,5 @@ util_test
 util_test.cpp
 .vscode/
 util_test.dSYM/
+amazon
 *.o
