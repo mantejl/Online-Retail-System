@@ -118,7 +118,7 @@ void MyDataStore::viewCart(string user) {
     // converting username to lower, and checkng if user has a cart 
     user = convToLower(user); 
     if (userCart.find(user) == userCart.end()) {
-        cout << "Invalid request" << endl;
+        cout << "Invalid username" << endl;
         return;
     }
     vector<Product*>::iterator it;

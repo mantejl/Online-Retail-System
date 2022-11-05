@@ -3,3 +3,5 @@ util_test.cpp
 .vscode/
 util_test.dSYM/
 *.o
+hw_tests/
+hw2_tests.tar.gz

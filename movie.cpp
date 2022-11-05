@@ -20,7 +20,7 @@ Movie::~Movie () {
 
 set<std::string> Movie::keywords() const {
     set<string> movieKeywords = parseStringToWords(name_);
-    movieKeywords.insert(genre_); 
+    movieKeywords.insert(convToLower(genre_)); 
     return movieKeywords; 
 }
 
