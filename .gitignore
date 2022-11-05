@@ -2,6 +2,11 @@ util_test
 util_test.cpp
 .vscode/
 util_test.dSYM/
+<<<<<<< HEAD
 *.o
 hw_tests/
 hw2_tests.tar.gz
+=======
+amazon
+*.o
+>>>>>>> 3b0c7ec11f760e603e2f13e474d47b77e057b0e4
